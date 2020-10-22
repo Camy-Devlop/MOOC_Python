@@ -1,6 +1,6 @@
-from fenetre import Fenetre
-from carrer import Carrer
-from point import Point
+from Outils.fenetre import Fenetre
+from Outils.carrer import Carrer
+from Outils.point import Point
 hauteur=500
 largeur=500
 fenetre=Fenetre(largeur,hauteur,"Black","lanseleau dans le ltmbirinte")

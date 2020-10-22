@@ -10,8 +10,7 @@ class Fenetre():
         self.crayon=Turtle()
         self.crayon.speed(0)
         self.list_objet = []
-        self.f.window_height()
-        self.f.window_width()
+        
 
     def add_objet(self, objet):
         self.list_objet.append(objet)
@@ -22,7 +21,7 @@ class Fenetre():
             self.crayon.penup()
             for j in self.list_objet:
 
-                j.update()
+                j.update(self.f.window_height(),self.f.window_width())
 
                 j.dessiner(self.crayon)
 
