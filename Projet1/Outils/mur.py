@@ -1,4 +1,6 @@
+from Outils.carrer import Carrer
 
+class Mur(Carrer):
 
-class Mur():
-    pass
+    def __init__(self):
+        pass
