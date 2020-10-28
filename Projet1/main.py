@@ -1,13 +1,26 @@
-from Outils.fenetre import Fenetre
+from Outils.CONFIGS import *
+from Outils.chateau import Chateau
 from Outils.carrer import Carrer
 from Outils.point import Point
-import os
-hauteur=500
-largeur=500
-fenetre=Fenetre(largeur,hauteur,"Black","lanseleau dans le ltmbirinte")
+import turtle
 
+#ch=Chateau(fichier_plan,COULEURS)
+hauteur,largeur=ZONE_PLAN_MINI
+"""
+p=turtle.Screen()
+p.setup(hauteur*-2,largeur*-2)
+pe=turtle.Turtle()
+pe.speed(0)
+pe.ht()
+#ch.dessiner()
+"""
 
-fenetre.add_objet(Carrer(Point(40,50),-1,1,"circle","blue"))
-fenetre.add_objet(Carrer(Point(30,-10),1,1,"square","white"))
-fenetre.dessiner()
+"""cc=Carrer(Point(-20,30),10,1,1,"","red")
+cc.dessiner(pe)
+print(cc.point)
 
+cc.point=(40,40)
+print(cc.point)
+#p.mainloop()"""
+
+help(Point)

@@ -1,16 +1,13 @@
 from Outils.debut_code import *
 
 
-class Mur(Carrer, Crayon):
+class Objet(Carrer):
     def __init__(self, point, coter, dx, dy, forme):
-        super().__init__(point, coter, dx, dy, forme, COULEUR_MUR)
-
+        super().__init__(point, coter, dx, dy, forme, COULEUR_OBJET)
         self.crayon = turtle.Turtle()
         self.crayon.hideturtle()
         self.crayon.speed(0)
         self.update()
-
-        # self.porte=CONFIGS.COULEURS.COULEUR_PORTE
 
     def update(self):
         self.crayon.penup()
