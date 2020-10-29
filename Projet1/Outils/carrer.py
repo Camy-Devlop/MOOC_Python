@@ -32,6 +32,11 @@ class Carrer(Point):
         self.dy = dy
 
     def dessiner(self, crayon: Turtle):
+        """
+        :methods dessiner: est une methode qui va dessiner le carrer a la coordonner donne en x et y
+        garce la methode turtle qui a été import
+        :param crayon: est argument passer du type Turtle qui c'est ui qui va desiner le carrée
+        """
         crayon.penup()
         crayon.goto(super().point)
         crayon.pendown()
