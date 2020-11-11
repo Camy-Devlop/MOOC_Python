@@ -2,8 +2,8 @@ from Outils.debut_code import *
 
 
 class Objet(Carrer):
-    def __init__(self, point, coter, dx, dy, forme):
-        super().__init__(point, coter, dx, dy, forme, COULEUR_OBJET)
+    def __init__(self, point, coter, dx, dy):
+        super().__init__(point, coter, dx, dy, COULEUR_OBJET)
         self.crayon = turtle.Turtle()
         self.crayon.hideturtle()
         self.crayon.speed(0)
@@ -11,5 +11,5 @@ class Objet(Carrer):
 
     def update(self):
         self.crayon.penup()
-        super().dessiner(self.crayon)
+        super().trace_case(self.crayon)
         self.crayon.penup()

@@ -2,7 +2,7 @@ from turtle import Turtle
 from Outils.point import Point
 
 
-class Carrer(Point):
+class Cercle(Point):
     """
     Auteur: ISMAIL ADBAIBI
     date : 15/10/2020
@@ -34,12 +34,7 @@ class Carrer(Point):
         crayon.penup()
         crayon.goto(super().point)
         crayon.pendown()
-        crayon.color(self.couleur)
-        crayon.begin_fill()
-        for i in range(4):
-            crayon.forward(self.coter)
-            crayon.left(90)
-        crayon.end_fill()
+        crayon.dot(10, self.couleur)
         crayon.penup()
 
     @property
