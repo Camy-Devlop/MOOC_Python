@@ -9,12 +9,10 @@ from Outils.vue import Vue
 
 class Joueur(Cercle):
     def __init__(self, coord: tuple, coter: int):
-
         super().__init__(coord, coter, 1, 1, COULEUR_PERSONNAGE)
         self.plan_ch: list
         self.ecoute = turtle.Screen()
         self.crayon = turtle.Turtle()
-
         self.crayon.speed(0)
         self.dx = coter  # permet de faire un placement de 10 pixelle en x
         self.dy = coter
@@ -29,52 +27,42 @@ class Joueur(Cercle):
     def update(self):
         self.trace_case(self.crayon)
 
-    def d_left(self):
-        self.ecoute.onkeypress(None, "Left")
-        if self.deplacer(self.plan_ch, self.position):
-            x, y = self.position
-            print(type(self.plan_ch[celulle[0]][celulle[1]]))
-            print("celulle ", celulle, " joueur", self.position)
-            self.new_couleur(COULEUR_VUE)
-            self.update()
-            self.position = (x - self.dx - 1, y)
-            self.new_couleur(COULEUR_PERSONNAGE)
-            self.update()
-        self.ecoute.onkeypress(self.deplacer_left, "Left")
-
     def set_plan_chateau(self, p):
         self.plan_ch = p
 
+    def d_left(self):
+        x, y = self.position
+        print(type(self.plan_ch[y][x]))
+        print("celulle ", self.plan_ch[y][x], " joueur", self.position)
+        self.new_couleur(COULEUR_VUE)
+        self.update()
+        self.position = (x - self.dx - 1, y)
+        self.new_couleur(COULEUR_PERSONNAGE)
+        self.update()
+
     def d_right(self):
-        self.ecoute.onkeypress(None, "Right")
         x, y = self.position
         self.new_couleur(COULEUR_VUE)
         self.update()
         self.position = (x + self.dx + 1, y)
         self.new_couleur(COULEUR_PERSONNAGE)
         self.update()
-        self.ecoute.onkeypress(self.deplacer_right, "Right")
 
     def d_up(self):
-        self.ecoute.onkeypress(None, "Up")
         x, y = self.position
         self.new_couleur(COULEUR_VUE)
         self.update()
         self.position = (x, y + self.dy + 1)
         self.new_couleur(COULEUR_PERSONNAGE)
         self.update()
-        self.ecoute.onkeypress(self.deplacer_up, "Up")
 
     def d_down(self):
-        self.ecoute.onkeypress(None, "Down")
         x, y = self.position
-
         self.new_couleur(COULEUR_VUE)
         self.update()
         self.position = (x, y - self.dx - 1)
         self.new_couleur(COULEUR_PERSONNAGE)
         self.update()
-        self.ecoute.onkeypress(self.deplacer_down, "Down")
 
     def new_couleur(self, nouvelle_couleur):
         super().new_couleur(nouvelle_couleur)
@@ -127,13 +115,21 @@ class Joueur(Cercle):
             print("celulle ", x, y, " joueur", self.position)
 
     def deplacer_right(self):
+        self.ecoute.onkeypress(None, "Right")
         self.deplacer(self.plan_ch, self.position, "droite")
+        self.ecoute.onkeypress(self.deplacer_right, "Right")
 
     def deplacer_left(self):
+        self.ecoute.onkeypress(None, "Left")
         self.deplacer(self.plan_ch, self.position, "gauche")
+        self.ecoute.onkeypress(self.deplacer_left, "Left")
 
     def deplacer_up(self):
+        self.ecoute.onkeypress(None, "Up")
         self.deplacer(self.plan_ch, self.position, "haut")
+        self.ecoute.onkeypress(self.deplacer_up, "Up")
 
     def deplacer_down(self):
+        self.ecoute.onkeypress(None, "Down")
         self.deplacer(self.plan_ch, self.position, "bas")
+        self.ecoute.onkeypress(self.deplacer_down, "Down")
