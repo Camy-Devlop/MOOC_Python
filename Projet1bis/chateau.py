@@ -98,6 +98,7 @@ class Carrer(Point):
         :methods trace_case: il va dessiner le carré
         :param crayon: il recoit class qui appartient a turtle qui va dessiner  le carré
         """
+        crayon._tracer(0)
         crayon.penup()
         crayon.goto(super().point)
         crayon.pendown()
