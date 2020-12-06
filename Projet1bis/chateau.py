@@ -1,6 +1,7 @@
 """
     Auteur: ISMAIL ADBAIBI
     date : 15/10/2020
+    test git
 """
 from turtle import textinput as demander
 import turtle
@@ -84,6 +85,7 @@ class Carrer(Point):
         :param dy:
         :param couleur: la couleur du carrer
         """
+
         self.forme = "square"
         super().__init__(coord=point)
         self.couleur = couleur
@@ -312,8 +314,7 @@ class Porte(Carrer, Question):
         self.crayon.penup()
         super().trace_case(self.crayon)
         self.crayon.penup()
-#TODO:faire documentation
-#TODO:afiicher Victoire dans annonceur
+
 class Porte_sortie(Carrer):
     def __init__(self, point, coter, dx, dy):
         super().__init__( point, coter, dx, dy, COULEUR_PORTE)
@@ -411,9 +412,9 @@ class Chateau():
                 elif j == 2:
                     tb_tmp.append(Porte_sortie((tmp_x, tmp_y), self.COTER, 1, 1))
                 elif j == 3:
-                    tb_tmp.append(Porte((tmp_x, tmp_y), self.COTER, 1, 1, self.dico_question[(ex, ey)]))
+                    tb_tmp.append(Porte((tmp_x, tmp_y), self.COTER, 1, 1, self.dico_question[(ey, ex)]))
                 elif j == 4:
-                    tb_tmp.append(Objet((tmp_x, tmp_y), self.COTER, 1, 1,self.dico_objet[(ex, ey)]))
+                    tb_tmp.append(Objet((tmp_x, tmp_y), self.COTER, 1, 1,self.dico_objet[(ey, ex)]))
                 tmp_x += self.COTER + 1
             self.plan_matrice.append(tb_tmp)
             tb_tmp = []
@@ -465,15 +466,12 @@ class Chateau():
     def creer_dictionnaire_des_objets(self) -> dict:
         #TODO:j'ai pas fini le trètement pour les objets
         #from CONFIGS import fichier_questions
-        memoire_qr = ""
-        import io
+
         d:str
         with open(fichier_objets, "r", encoding="utf-8") as lec:
             d = lec.read()
         f = d.strip('\n')
-
         f = f.split("\n")
-
         f_dico = dict()
         for v in f:
             d1, d2 = v.split("),")
@@ -1011,15 +1009,12 @@ class Joueur(Cercle):
 chateau = Chateau(fichier_plan, COULEURS, ZONE_PLAN_MINI, ZONE_PLAN_MAXI)
 hauteur, largeur = ZONE_PLAN_MINI
 p = turtle
+
 p.Screen()
 p.setup((hauteur * -2)+20, (largeur * -2+20))
-
 chateau.afficher_plan()
 p1 = Joueur((chateau.get_chateau()[0][1].position[0]+(chateau.get_coter()//2),chateau.get_chateau()[0][1].position[1]-(chateau.get_coter()//2)),chateau.get_coter())
-
 p1.set_plan_chateau(chateau.get_chateau())
 p1.nombre_objet_a_trouvers(len(chateau.dico_objet))
 p1.ecoute.mainloop()
 p.listen()
-#p.mainloop()
-#turtle.write("salut man ", font=("Arial", 12, "normal"))
