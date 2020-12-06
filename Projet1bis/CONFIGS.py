@@ -17,8 +17,9 @@ COULEUR_EXTERIEUR = 'white'
 # Couleur et dimension du personnage
 COULEUR_PERSONNAGE = 'red'
 RATIO_PERSONNAGE = 0.9  # Rapport entre diamètre du personnage et dimension des cases
+POSITION_DEPART = (0, 1)  # Porte d'entrée du château
 
 # Désignation des fichiers de données à utiliser
-fichier_plan = 'plan_chateau2.txt'
-fichier_questions = 'dico_portes1.txt'
-fichier_objets = 'dico_objets1.txt'
+fichier_plan = 'plan_chateau.txt'
+fichier_questions = 'dico_portes.txt'
+fichier_objets = 'dico_objets.txt'

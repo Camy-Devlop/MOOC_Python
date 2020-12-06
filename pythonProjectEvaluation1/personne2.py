@@ -213,7 +213,7 @@ def deplacer_bas ():
 
 
 
-mat = (lire_matrice("plan_chateau2.txt"))
+mat = (lire_matrice("plan_chateau.txt"))
 matrice = mat
 
 turtle.speed(0)

@@ -1,0 +1,9 @@
+(5, 18), 'indice1 = miroir'
+(3, 1), 'indice3 = la lantairne'
+(16, 16), 'indice2 = (x + 3) ÷ x et x = 0'
+(5, 5), 'indice4 = Qui c\'est brulée les ailes en prenant le vole vers le soleil?'
+(14, 8), 'indice5 = qu'elle est la formule de l\'eau
+(15, 8), 'indice6 = 36°17\'29.2\’\’N 139°01\07.5\'\'E'
+(15, 1), 'indice7 = '
+(15, 1), 'indice8 = '
+(15, 1), 'indice9 = '

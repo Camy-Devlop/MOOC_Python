@@ -1,7 +1,7 @@
 """
     Auteur: ISMAIL ADBAIBI
     date : 15/10/2020
-    test git
+    
 """
 from turtle import textinput as demander
 import turtle

@@ -1,6 +1,6 @@
-(15, 1), 'indice3 = [4, 5, 6]'
-(1, 7), "indice1 = {3: 'A B C'}"
-(7, 11), "indice4 = '(1, 2)'"
-(17, 11), 'typage = mode de déclaration des types de variable'
-(5, 23), "indice5 = '(3, 4)'"
-(1, 25), '27 * 37 = 999'
+(1, 15), 'indice3 = [4, 5, 6]'
+(7, 1), "indice1 = {3: 'A B C'}"
+(11, 7), "indice4 = '(1, 2)'"
+(11, 17), 'typage = mode de déclaration des types de variable'
+(23, 5), "indice5 = '(3, 4)'"
+(25, 1), '27 * 37 = 999'
