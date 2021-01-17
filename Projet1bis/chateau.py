@@ -3,10 +3,11 @@
     date : 15/10/2020
     
 """
+import time  #j'utilise les fonction de time pour faire une pauss pourque le jeux ne ferme pas la fenetre directement
 from turtle import textinput as demander
 import turtle
 from turtle import Turtle
-from CONFIGS import *
+from CONFIGS import *  #j'import tout le contenue du fichier
 
 class Point():
     """
@@ -63,7 +64,7 @@ class Point():
         :methode __str__: returne un string avec la coordonner du point des deux entier x,y
         :return: coordonne en format string ex: (x,y)
         """
-        return "({0},{1})".format(self.x, self.y)
+        return "({0},{1})".format(self.x, self.y) #c'est une fonction pour moi pour voir les coordonne d'un object
 
 class Carrer(Point):
     """
@@ -89,7 +90,7 @@ class Carrer(Point):
         self.forme = "square"
         super().__init__(coord=point)
         self.couleur = couleur
-        self.coter = coter
+        self.coter = coter #longueur d'un coté d'un carre
         self.dx = dx
         self.dy = dy
 
@@ -98,17 +99,17 @@ class Carrer(Point):
         :methods trace_case: il va dessiner le carré
         :param crayon: il recoit class qui appartient a turtle qui va dessiner  le carré
         """
-        crayon._tracer(0)
-        crayon.penup()
-        crayon.goto(super().point)
-        crayon.pendown()
-        crayon.color(self.couleur)
-        crayon.begin_fill()
+        crayon._tracer(0)# va permetre de faire un affichage instantaner
+        crayon.penup() #lever le croyon
+        crayon.goto(super().point) #le crayon va a la position donne avec les coordonne donner par super class
+        crayon.pendown() #descent le croyon pour permetre de dessiner
+        crayon.color(self.couleur)#donne la couleur qui va effectuer le dessin
+        crayon.begin_fill() #debut de la prosedure faire des dessin surface avec une couleur qui a ete donnée
         for i in range(4):
-            crayon.forward(self.coter)
-            crayon.left(-90)
-        crayon.end_fill()
-        crayon.penup()
+            crayon.forward(self.coter)#deplacement du crayon
+            crayon.left(-90)#roation du crayon
+        crayon.end_fill()#fin du dessin de surface a dessinée
+        crayon.penup()#...
 
     @property
     def position(self):
@@ -116,7 +117,7 @@ class Carrer(Point):
         :methods position : est une  methode getteur retourne la coordonne du point
         :return: returne un tuple de x et y
         """
-        return super().point
+        return super().point #voir dans la classe point
 
     @position.setter
     def position(self, new_point):
@@ -124,7 +125,7 @@ class Carrer(Point):
         :methods point : est une methode setter qui modifier les valeur x et y
         :param new_point: elle recoi en argument coord qui est un tuple de deux entier x,y
         """
-        self.point = new_point
+        self.point = new_point #voir class point
 
     def new_couleur(self, nouvealle_couleur):
         """
@@ -194,35 +195,25 @@ class Cercle(Point):
         """
         self.couleur = nouvealle_couleur
 
-class Crayon():
-    """
-    Auteur: ISMAIL ADBAIBI
-    date : 15/10/2020
-    But du programme :
-    :class Crayon: la classe Crayon permet de dessiner la frome demander avec une longeur donner
-                   donne en argumentn et avec un couleur et une position donnée
-                   c'est une classe qui herite de la classe Point
-
-        """
-    def __init__(self):
-        self.crayon=turtle.Turtle()
-        self.crayon.hideturtle()
-        self.crayon.speed(0)
-        self.update()
-
-
-    def update(self):
-        self.crayon.penup()
-        super().dessiner(self.crayon)
-        self.crayon.penup()
-
 class Couloir(Carrer):
     def __init__(self, point, coter, dx, dy):
+        """
+        Auteur: ISMAIL ADBAIBI
+        date : 15/10/2020
+        But du programme :
+        :Class Couloir: la classe Couloir permet de dessiner un Couloir avec une longeur donner
+                        en argumentn passer a __init__ et avec coordonné, longueur du coté un couleur
+                        c'est une classe qui herite de la classe Point et de la class Carrer
+            :param point: les coordonne (x,y):tuple
+            :param coter: longueur du coté
+            :param dx:
+            :param dy:
+        """
         super().__init__(point, coter, dx, dy, COULEUR_COULOIR)
         self.crayon = turtle.Turtle()
-        self.crayon.hideturtle()
-        self.crayon.speed(0)
-        self.update()
+        self.crayon.hideturtle()#permet de effacer le curseur de turtle
+        self.crayon.speed(0)#permet que le crayon dessine tres vite 0est la viter max
+        self.update()#actualiser les donne voir plus bas
 
     def update(self):
         self.crayon.penup()
@@ -242,7 +233,7 @@ class Mur(Carrer):
     def __init__(self, point, coter, dx, dy):
         """
             :param point: Class Point donne la coordonné du mur
-            :param coter: la longueur du morceau de mur
+            :param coter: la longueur du mur
             :param dx:
             :param dy:
 
@@ -267,6 +258,19 @@ class Mur(Carrer):
 
 class Objet(Carrer):
     def __init__(self, point, coter, dx, dy,message:str):
+        """
+        Auteur: ISMAIL ADBAIBI
+        date : 15/10/2020
+        But du programme :
+        :Class Couloir: la classe Objet permet de dessiner un Objet avec une longeur donner
+                        en argumentn passer a __init__ et avec coordonné, longueur du coté un couleur
+                        c'est une classe qui herite de la classe Point et de la class Carrer
+        :param point: Class Point donne la coordonné du Object
+        :param coter: longueur du du coté objet frome carré
+        :param dx:
+        :param dy:
+        :param message: c'est l'objet de type str
+        """
         super().__init__(point, coter, dx, dy, COULEUR_OBJET)
         self.message=message
         self.crayon = turtle.Turtle()
@@ -275,7 +279,7 @@ class Objet(Carrer):
         self.update()
 
     def get_message(self)->str:
-        return self.message
+        return self.message #retourne l'info d'l'objet
 
     def update(self):
         self.crayon.penup()
@@ -285,10 +289,24 @@ class Objet(Carrer):
 class Question():
 
     def __init__(self,sujet:tuple):
-        self.question=sujet[0]
-        self.reponce=sujet[1]
+        """
+        Auteur: ISMAIL ADBAIBI
+        date : 15/10/2020
+        But du programme :
+        :Class Couloir: la classe Question permet d'interrogie avec le joueur et pose une question
 
-    def poser_question(self):
+        :param sujet: parametre sujet est tuple de deux str le premier est une question la deuxime est la reponce
+        """
+        self.question=sujet[0] #la question
+        self.reponce=sujet[1] #la reponce
+
+    def poser_question(self)->bool:
+        """
+        :methods poser_question: va cree une demande dans un box avec retour str
+                                va verifier la reponce et retourne True s'il a bien repondu
+                                et False si la reponce est fauce
+        :return: retour un boolean
+        """
         if demander("Question",self.question)==self.reponce:
             turtle.listen()
             return True
@@ -298,14 +316,26 @@ class Question():
 
     def __str__(self):
         return "Question ?"
-#TODO:faire documentation
-class Porte(Carrer, Question):
-    """
 
-    """
+class Porte(Carrer, Question):
+
     def __init__(self, point, coter, dx, dy, ques:tuple):
+        """
+        Auteur: ISMAIL ADBAIBI
+        date : 15/10/2020
+        But du programme :
+        :Class Porte:   la classe Porte permet d'interroger le joueur avec des question
+                        elle herite de la classe Carrer et question voir plus haut
+
+        :param point: coordonner de la port
+        :param coter: longueur de la port
+        :param dx:
+        :param dy:
+        :param ques: question  qui va etre poer pour l'ouverture de la porte
+        """
         Carrer.__init__(self,point, coter, dx, dy, COULEUR_PORTE)
         Question.__init__(self,ques)
+
         self.crayon = turtle.Turtle()
         self.crayon.hideturtle()
         self.crayon.speed(0)
@@ -318,6 +348,18 @@ class Porte(Carrer, Question):
 
 class Porte_sortie(Carrer):
     def __init__(self, point, coter, dx, dy):
+        """
+        Auteur: ISMAIL ADBAIBI
+        date : 15/10/2020
+        But du programme :
+        :Class Porte:   la classe Porte_sortie permet de dire au programe que je joueur a finie le jeux
+                        elle herite de la classe Carrer
+
+        :param point: coordonnée de la porte de sortie
+        :param coter: longueur de la porte
+        :param dx:
+        :param dy:
+        """
         super().__init__( point, coter, dx, dy, COULEUR_PORTE)
 
         self.crayon = turtle.Turtle()
@@ -329,7 +371,7 @@ class Porte_sortie(Carrer):
         self.crayon.penup()
         super().trace_case(self.crayon)
         self.crayon.penup()
-
+#TODO: finir la documentation de chateau
 class Chateau():
     """
       Auteur: ISMAIL ADBAIBI
@@ -357,15 +399,15 @@ class Chateau():
 
         self.chateau_str: str = None
         self.couleur = couleur
-        self.ZONE_PLAN1: tuple = zone_plan1
-        self.ZONE_PLAN2: tuple = zone_plan2
-        self.dico_question = self.lire_dico_portes()
-        self.dico_objet=self.creer_dictionnaire_des_objets()
+        self.ZONE_PLAN1: tuple = zone_plan1 # emplacement du dessin labyrinthe coordonner
+        self.ZONE_PLAN2: tuple = zone_plan2 # coordonne du max desssin
+        self.dico_question = self.lire_dico_portes() # va recper un fichier extraire les donne question et porte
+        self.dico_objet=self.creer_dictionnaire_des_objets() # va recper un fichier extraire les donne objet
         self.matrice = self.lire_matrice(fichier)
         self.COTER = (min(abs(self.ZONE_PLAN1[0]) + abs(self.ZONE_PLAN2[0]),
                           abs(self.ZONE_PLAN1[1]) + abs(self.ZONE_PLAN2[1]))) // max(len(self.matrice),
                                                                                      len(self.matrice[0]))
-        self.plan_matrice: list = []
+        self.plan_matrice: list = [] #le plan du chateau
         self.nombre_case_y:int=None
         self.nombre_case_x:int=None
 
@@ -403,7 +445,7 @@ class Chateau():
         tb_tmp = []
         tmp_x = self.ZONE_PLAN1[0]
         tmp_y = self.ZONE_PLAN2[1]
-
+        #la creaation du plan du chateau avec le porte .......
         for ey, i in enumerate(self.matrice):
             for ex,j in enumerate(i):
                 if j == 0:
@@ -433,11 +475,15 @@ class Chateau():
         return self.COTER
 
     def lire_dico_portes(self) -> dict:
+        """
+         lecture du fichier dico_ports.py recuper les données et faire un dict
+        :return: dico
+        """
 
-        #from CONFIGS import fichier_questions
         memoire_qr = ""
         import io
         d:str
+        #traitement du fichier pour fabriquer un dict
         with open(fichier_questions, "r", encoding="utf-8") as lec:
             d = lec.read()
         f = d.strip('\n')
@@ -498,10 +544,10 @@ class Annonceur(Point):
     def __init__(self):
         super().__init__(coord=(POINT_AFFICHAGE_ANNONCES[0],POINT_AFFICHAGE_ANNONCES[1]-15))
         self.font_police:str="arial"
-        self.taille_police:int=12
+        self.taille_police:int=11
         self.type_police:str="normal"
         self.COULEUR_POLICE:str="black"
-        self.message_debut="bonjour bienvenue dans mon jeux amusez vous bien !!!!! "
+        self.message_debut=" Bonjour bienvenue dans mon jeux amusez vous bien !!!!! "
         self.crayon=Turtle()
         self.crayon.hideturtle()
         self.crayon.speed(0)
@@ -518,7 +564,7 @@ class Annonceur(Point):
         """
         self.efface_annonce()# il va effacer le texte avant d'afficher le texte voulue
         self.crayon.penup()
-        self.crayon.goto(super().point[0] - 4, super().point[1])
+        self.crayon.goto(super().point[0] - 3, super().point[1])
         self.crayon.pendown()
         self.crayon.color(self.COULEUR_POLICE)
         self.crayon.write(message,font=(self.font_police,self.taille_police,self.type_police))
@@ -529,7 +575,7 @@ class Annonceur(Point):
 
         """
         self.crayon.penup()
-        self.crayon.goto(super().point[0]-4,super().point[1])
+        self.crayon.goto(super().point[0]-5,super().point[1])
         self.crayon.pendown()
         self.crayon.color(COULEUR_EXTERIEUR)
         self.crayon.begin_fill()
@@ -558,7 +604,7 @@ class Inventaire(Point):
         """
         super().__init__(coord=POINT_AFFICHAGE_INVENTAIRE)
         self.font_police: str = "arial"
-        self.taille_police: int = 12
+        self.taille_police: int = 11
         self.type_police: str = "normal"
         self.COULEUR_POLICE: str = "black"
         self.message_debut = "Invantaire"
@@ -576,15 +622,13 @@ class Inventaire(Point):
         self.crayon.penup()
 
         x,y=super().point
-        print(x, y)
-        y-=10
+        y-=15
         self.point=(x,y)
 
-        print(super().point)
         self.crayon.goto(super().point)
         self.crayon.pendown()
         self.cpt+=1
-        self.crayon.write("N°{0}: {1}".format(self.cpt, self.objet[self.cpt-1]))
+        self.crayon.write("N°{0}: {1}".format(self.cpt, self.objet[self.cpt-1]),font=(self.font_police, self.taille_police, self.type_police))
 
 
     def get_nombre_objet(self)->int:
@@ -620,23 +664,23 @@ class Joueur(Cercle):
                       se positionne bien au centre du carrer
         """
         super().__init__(coord, coter, 1, 1, COULEUR_PERSONNAGE)
-        self.inventaire=Inventaire()
-        self.annonceur=Annonceur()
-        self.coordoner_tableau:tuple=[1,0]
-        self.plan_ch: list
+        self.inventaire=Inventaire()# inventaire voir plus au inisialiser
+        self.annonceur=Annonceur()#c'est la bannier qui indique si on a ouvert une porte ou trouver un objet
+        self.coordoner_tableau:list=[1,0]# coordonne du joueur lors du debut du jeux
+        self.plan_ch: list# plan du chateau
         self.ecoute = turtle.Screen()
         self.crayon = turtle.Turtle()
-        self.crayon.hideturtle()
-        self.crayon.speed(0)
+        self.crayon.hideturtle()#permet de cacher le triagle de la tortue
+        self.crayon.speed(0)#la vitesse de l'affichage mis a 0 le plus rapide
         self.dx = coter  # permet de faire un placement de 10 pixelle en x
         self.dy = coter
-        self.ecoute.listen()
-        self.ecoute.onkeypress(self.deplacer_left, "Left")
+        self.ecoute.listen()# demander d'ecouter touce qui sepase du clavier
+        self.ecoute.onkeypress(self.deplacer_left, "Left")#ecouteur du clavier ideme avec la suite
         self.ecoute.onkeypress(self.deplacer_right, "Right")
         self.ecoute.onkeypress(self.deplacer_up, "Up")
         self.ecoute.onkeypress(self.deplacer_down, "Down")
-        self.nombre_objet_a_trouver:int=None
-        self.update()
+        self.nombre_objet_a_trouver:int=None #inisilaliser le nombre d'obje d'ojet trouver  a  0
+        self.update() # affiche tout le modificatino
         
     def update(self):
         """
@@ -661,13 +705,13 @@ class Joueur(Cercle):
         """
         :methods d_left:va faire deplace le joueur vers la gauche
         """
-        x, y = self.position
-        self.new_couleur(COULEUR_VUE)
-        self.update()
-        self.position = (x - self.dx - 1, y)
-        self.new_couleur(COULEUR_PERSONNAGE)
-        self.update()
-
+        x, y = self.position#position actuelle
+        self.new_couleur(COULEUR_VUE)# va changer la couleur de la case une deplacer
+        self.update()# fais le dessin de la case le placement du joueur
+        self.position = (x - self.dx - 1, y)# la nouvelle position du joueur
+        self.new_couleur(COULEUR_PERSONNAGE)# instrudire la coukeur du joueur
+        self.update()# va desinne le joueur
+    #c'est la meme chose pour le reste des fonction d_right et d_up d= deplacement le mot à cote donne la diretion
     def d_right(self):
         """
         :methods d_right:va faire deplace le joueur vers la droite
@@ -694,12 +738,12 @@ class Joueur(Cercle):
         """
         :methods d_down:va faire deplace le joueur vers le bas
         """
-        x, y = self.position
-        self.new_couleur(COULEUR_VUE)
-        self.update()
-        self.position = (x, y - self.dx - 1)
-        self.new_couleur(COULEUR_PERSONNAGE)
-        self.update()
+        x, y = self.position #position actuelle
+        self.new_couleur(COULEUR_VUE) # va changer la couleur de la case une deplacer
+        self.update()# fais le dessin de la case le placement du joueur
+        self.position = (x, y - self.dx - 1)# la nouvelle position du joueur
+        self.new_couleur(COULEUR_PERSONNAGE) # instrudire la coukeur du joueur
+        self.update()# va desinne le joueur
 
     def new_couleur(self, nouvelle_couleur):
         """
@@ -721,7 +765,8 @@ class Joueur(Cercle):
             x = self.coordoner_tableau[0]
             y = self.coordoner_tableau[1]
 
-
+            #quand le joueur se deplace il doit verifier si le joueur est bien dans un couloir
+            # ou un mur une porte ou un objet ...
             if x<len(self.plan_ch[0]):
                 if self.plan_ch[y][x + 1].__class__ in [Couloir.__mro__[0], Objet.__mro__[0],Porte.__mro__[0],Porte_sortie.__mro__[0]]:
                     if self.plan_ch[y][x + 1].__class__ == Couloir.__mro__[0]:
@@ -966,8 +1011,9 @@ class Joueur(Cercle):
                             self.update()
                             self.update()
                             self.annonceur.affiche_nouveau_message("Bravo, Vous avez gagner!!!!!")
-                            for i in range(1000000):#pour pas que la fenetre se referme directement
-                                pass
+                            time.sleep(10)#pour pas que la fenetre se referme directement
+                                  # pour pas que la fenetre se referme directement
+
                             exit(0)
                         else:
                             self.annonceur.affiche_nouveau_message("Vous avez pas trouver tout les objets!!!!!")
@@ -977,18 +1023,18 @@ class Joueur(Cercle):
         :methods deplacer_right:va faire la demande de direction a droite
 
         """
-        self.ecoute.onkeypress(None, "Right")
-        self.deplacer(self.plan_ch, self.position, "droite")
-        self.ecoute.onkeypress(self.deplacer_right, "Right")
+        self.ecoute.onkeypress(None, "Right")#mette en pauss le clavier
+        self.deplacer(self.plan_ch, self.position, "droite")# fais a fonction deplacement elle passe en parametre le plan le position et la direction
+        self.ecoute.onkeypress(self.deplacer_right, "Right")#rectiver le clavier
 
     def deplacer_left(self):
         """
         :methods deplacer_left:va faire la demande de direction a gauche
 
         """
-        self.ecoute.onkeypress(None, "Left")
-        self.deplacer(self.plan_ch, self.position, "gauche")
-        self.ecoute.onkeypress(self.deplacer_left, "Left")
+        self.ecoute.onkeypress(None, "Left")#mette en pauss le clavier
+        self.deplacer(self.plan_ch, self.position, "gauche")# fais a fonction deplacement elle passe en parametre le plan le position et la direction
+        self.ecoute.onkeypress(self.deplacer_left, "Left")#rectiver le clavier
 
     def deplacer_up(self):
         """
@@ -1011,9 +1057,9 @@ chateau = Chateau(fichier_plan, COULEURS, ZONE_PLAN_MINI, ZONE_PLAN_MAXI)
 hauteur, largeur = ZONE_PLAN_MINI
 p = turtle
 
-p.Screen()
-p.setup((hauteur * -2)+20, (largeur * -2+20))
-chateau.afficher_plan()
+p.Screen()# creation de la fenetre du jeux
+p.setup((hauteur * -2)+20, (largeur * -2+20)) #definir la dimantion
+chateau.afficher_plan() 
 p1 = Joueur((chateau.get_chateau()[0][1].position[0]+(chateau.get_coter()//2),chateau.get_chateau()[0][1].position[1]-(chateau.get_coter()//2)),chateau.get_coter())
 p1.set_plan_chateau(chateau.get_chateau())
 p1.nombre_objet_a_trouvers(len(chateau.dico_objet))
